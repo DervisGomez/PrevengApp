@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    tools:context="org.app.prevengapp.NuevoReporteActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:weightSum="3">
+                <Button
+                    android:id="@+id/btnFoto1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                    android:background="@color/colorAccent"
+                    android:text="Nueva Foto"/>
+                <Button
+                    android:id="@+id/btnFoto2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                    android:background="@color/colorAccent"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:text=""/>
+                <Button
+                    android:id="@+id/btnFoto3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                    android:background="@color/colorAccent"
+                    android:text=""/>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etTituloReporte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:inputType="text"
+                android:hint="Titulo del reporte"/>
+            <EditText
+                android:id="@+id/etDescripcionReporte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:inputType="textMultiLine"
+                android:minLines="2"
+                android:hint="Descripción del reporte y/o punto de referencia"/>
+            <EditText
+                android:id="@+id/etDireccionReporte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:inputType="textMultiLine"
+                android:minLines="2"
+                android:editable="false"
+                android:hint="Dirección"/>
+            <EditText
+                android:id="@+id/etCoordenadasReporte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:editable="false"
+                android:hint="Coordenadas reporte"/>
+            <Button
+                android:id="@+id/btnNuevoReporte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_marginTop="12dp"
+                android:text="Enviar"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/llFotoRep"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/ivFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/logologin"/>
+        <Button
+            android:id="@+id/btnRegresarRepo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorPrimary"
+            android:text="Regresar"/>
+    </LinearLayout>
+
+</RelativeLayout>

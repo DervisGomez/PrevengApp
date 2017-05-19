@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Nuevo Reporte" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Mis Reportes" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Tips informativo" />
+    </group>
+    <group android:id="@+id/grupo" android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_send"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Listado de Reporte" />
+        <item
+            android:id="@+id/nav_Cambiar_usuario"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Cambiar tipo de usuario" />
+        <item
+            android:id="@+id/nav_asignar"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Asignar" />
+    </group>
+    <group android:id="@+id/grupo2" android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_reporte_asignado"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Reporte Asignados" />
+    </group>
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_contactato"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Contactanos" />
+
+        <item
+            android:id="@+id/nav_salir"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Salir" />
+    </group>
+
+</menu>

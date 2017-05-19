@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@drawable/circ_fondo"
+        android:id="@+id/tvNumero"
+        android:layout_marginRight="9dp"
+        android:text="10"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:gravity="center_horizontal|center_vertical"/>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/TituloMisReporte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Titulo de la Evento"
+                android:textStyle="bold"
+                android:minLines="1"
+                android:maxLines="1"
+                android:layout_weight="1"
+                android:textSize="18dp"/>
+            <TextView
+                android:id="@+id/tvFechaR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fecha"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/EstadoMisReporte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:minLines="1"
+                android:maxLines="2"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="1dp"
+                android:textColor="@color/colorAccent"
+                android:text="Descripción de de la noticia publicada, Descripción de de la noticia publicada"/>
+
+<!--
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginRight="8dp"
+                android:background="@color/colorPrimaryDark">
+
+                <TextView
+                    android:id="@+id/tvPrioridadR"
+                    android:layout_width="40dp"
+                    android:layout_height="32dp"
+                    android:background="@color/colorWhiter"
+                    android:text=""
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_margin="4dp"
+                    android:padding="7dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorAccent">
+
+                <TextView
+                    android:id="@+id/tvAsignarR"
+                    android:layout_width="40dp"
+                    android:layout_height="32dp"
+                    android:background="@color/colorWhiter"
+                    android:text="A"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_margin="4dp"
+                    android:padding="7dp"/>
+            </LinearLayout>-->
+        </LinearLayout>
+
+           </LinearLayout>
+</LinearLayout>
