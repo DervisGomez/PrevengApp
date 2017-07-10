@@ -4,6 +4,11 @@
     <item
         android:id="@+id/action_filtrar"
         android:orderInCategory="100"
-        android:title="Filtrar"
+        android:title="Filtrar Estado"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_fecha"
+        android:orderInCategory="100"
+        android:title="Filtrar Fecha"
         app:showAsAction="never" />
 </menu>

@@ -195,7 +195,7 @@ public class DetalleReporteActivity extends AppCompatActivity implements View.On
             fab3.setVisibility(View.GONE);
             cambiar.setVisibility(View.GONE);
         }else{
-            cambiar.setVisibility(View.GONE);
+            //cambiar.setVisibility(View.GONE);
         }
 
     }

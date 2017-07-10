@@ -54,6 +54,23 @@ public class MisReportesAdminActivity extends AppCompatActivity implements View.
     Spinner spFiltrar;
     int control=1;
 
+    private int mYear;
+    private int mMonth;
+    private int mDay;
+    private int mYear2;
+    private int mMonth2;
+    private int mDay2;
+    static final int DATE_DIALOG_DESDE = 2;
+    static final int DATE_DIALOG_HASTA = 1;
+    Button btnVerTodo2;
+    Button btnDesde;
+    Button btnHasta;
+    Button btnFiltrar2;
+    EditText etDesde;
+    EditText etHasta;
+    TextView btnCancelar2;
+    RelativeLayout rlFiltrar2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +88,21 @@ public class MisReportesAdminActivity extends AppCompatActivity implements View.
         btnFiltrar.setOnClickListener(this);
         rlFiltrar.setVisibility(View.GONE);
 
+        rlFiltrar2=(RelativeLayout)findViewById(R.id.rlFiltrar);
+        etHasta=(EditText)findViewById(R.id.etHasta);
+        etDesde=(EditText)findViewById(R.id.etDesde);
+        btnDesde=(Button)findViewById(R.id.btnDesde);
+        btnHasta=(Button)findViewById(R.id.btnHasta);
+        btnFiltrar2=(Button)findViewById(R.id.btnFiltrar);
+        btnCancelar2=(TextView) findViewById(R.id.btnCancelarfilt);
+        btnVerTodo2=(Button)findViewById(R.id.btnTodo);
+        btnVerTodo2.setOnClickListener(this);
+        btnCancelar2.setOnClickListener(this);
+        btnFiltrar2.setOnClickListener(this);
+        btnDesde.setOnClickListener(this);
+        btnHasta.setOnClickListener(this);
+        rlFiltrar2.setVisibility(View.GONE);
+
         Bundle bolsa=getIntent().getExtras();
         String docu=bolsa.getString("documento");
         usua=bolsa.getString("usuario");
@@ -81,9 +113,48 @@ public class MisReportesAdminActivity extends AppCompatActivity implements View.
             new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/reportesasignados/",docu).execute();
         }
 
-
+        final Calendar c= Calendar.getInstance();
+        mYear=c.get(Calendar.YEAR);
+        mMonth=c.get(Calendar.MONTH);
+        mDay=c.get(Calendar.DAY_OF_MONTH);
+        mYear2=c.get(Calendar.YEAR)-10;
+        mMonth2=c.get(Calendar.MONTH);
+        mDay2=c.get(Calendar.DAY_OF_MONTH);
+        actualizarFecha();
 
     }
+
+    public void actualizarFecha(){
+        //if(i==1){
+        etHasta.setText(
+                new StringBuilder()
+                        .append(mDay).append("-")
+                        .append(mMonth+1).append("-")
+                        .append(mYear).append(""));
+        //}else{
+        etDesde.setText(
+                new StringBuilder()
+                        .append(mDay2).append("-")
+                        .append(mMonth2+1).append("-")
+                        .append(mYear2).append(""));
+        //}
+    }
+
+    private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker datePicker, int i0, int i1, int i2) {
+            if (i==1){
+                mYear=i0;
+                mMonth=i1;
+                mDay=i2;
+            }else{
+                mYear2=i0;
+                mMonth2=i1;
+                mDay2=i2;
+            }
+            actualizarFecha();
+        }
+    };
 
     public void llamarActivity(String[] item){
         Intent i= new Intent(this, DetalleReporteActivity.class);
@@ -125,6 +196,9 @@ public class MisReportesAdminActivity extends AppCompatActivity implements View.
                     rlFiltrar.setVisibility(View.VISIBLE);
                 }
 
+                return true;
+            case R.id.action_fecha:
+                rlFiltrar2.setVisibility(View.VISIBLE);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -256,7 +330,83 @@ public class MisReportesAdminActivity extends AppCompatActivity implements View.
                 });
                 rlFiltrar.setVisibility(View.GONE);
                 break;
+            case R.id.btnDesde:
+                i=2;
+                showDialog(DATE_DIALOG_DESDE);
+                break;
+            case R.id.btnHasta:
+                i=1;
+                showDialog(DATE_DIALOG_HASTA);
+                break;
+            case R.id.btnFiltrar:
+                filtrarFecha();
+                rlFiltrar2.setVisibility(View.GONE);
+                break;
+            case R.id.btnCancelarfilt:
+                rlFiltrar2.setVisibility(View.GONE);
+                break;
+            case R.id.btnTodo:
+                List<String[]> listaReporteMostrar=new ArrayList<>();
+                listaReporteMostrar=listaReporte;
+                lista.setAdapter(new MisReportesAdater(this, listaReporteMostrar));
+                lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+                        String[] item = (String[]) lista.getAdapter().getItem(pos);
+                        llamarActivity(item);
+
+                    }
+                });
+                rlFiltrar2.setVisibility(View.GONE);
+                break;
         }
+    }
+
+    public void filtrarFecha(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); //Para declarar valores en nuevos objetos date, usa el mismo formato date que usaste al crear las fechas
+        try {
+            List<String[]> listaReporteMostrar=new ArrayList<>();
+            final Calendar c= Calendar.getInstance();
+            Calendar desde = Calendar.getInstance();
+            Calendar hasta = Calendar.getInstance();
+            desde.set(mYear2,mMonth2,mDay2);
+            hasta.set(mYear,mMonth,mDay);
+            for (int x=0;x<listaReporte.size();x++){
+                //showAlertDialog(MisReportesActivity.this,listaReporte.get(x)[6].substring(0,4)+"-"+listaReporte.get(x)[6].substring(5,7)+"-"+listaReporte.get(x)[6].substring(8,10),String.valueOf(x),true);
+                Calendar fecha = Calendar.getInstance();
+                fecha.set(Integer.valueOf(listaReporte.get(x)[6].substring(0,4)),Integer.valueOf(listaReporte.get(x)[6].substring(5,7))-1,Integer.valueOf(listaReporte.get(x)[6].substring(8,10)));
+                if (desde.before(fecha)&&fecha.before(hasta)){
+                    //showAlertDialog(MisReportesActivity.this,"hola",String.valueOf(x)+"dd",true);
+                    listaReporteMostrar.add(listaReporte.get(x));
+                }
+
+            }
+            lista.setAdapter(new MisReportesAdater(this, listaReporteMostrar));
+            lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+                    String[] item = (String[]) lista.getAdapter().getItem(pos);
+                    llamarActivity(item);
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlertDialog(MisReportesAdminActivity.this,"Reportes",e.toString(),false);
+        }
+
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id){
+        switch (id){
+            case DATE_DIALOG_HASTA:
+                return  new DatePickerDialog(this,mDateSetListener,mYear,mMonth,mDay);
+            case DATE_DIALOG_DESDE:
+                return  new DatePickerDialog(this,mDateSetListener,mYear2,mMonth2,mDay2);
+        }
+        return  null;
+
     }
 
     public void filtrarEstado(){

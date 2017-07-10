@@ -45,6 +45,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
+import uk.co.senab.photoview.PhotoViewAttacher;
+
 public class NuevoReporteActivity extends AppCompatActivity implements View.OnClickListener{
 
     private String APP_DIRECTORY="myPictureApp/";
@@ -239,6 +241,7 @@ public class NuevoReporteActivity extends AppCompatActivity implements View.OnCl
                     Bitmap mImageBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                     foto.setImageBitmap(mImageBitmap);
                     llFoto.setVisibility(View.VISIBLE);
+                    PhotoViewAttacher photoViewAttacher=new PhotoViewAttacher(foto);
                 }
                 break;
             case R.id.btnFoto2:

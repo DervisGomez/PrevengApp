@@ -23,6 +23,13 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
         <Button
+            android:id="@+id/btnGuardarVerFoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="8dp"
+            android:text="Guardar Foto"/>
+        <Button
             android:id="@+id/btnRegresarVerFoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -3,10 +3,13 @@ package org.app.prevengapp;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -16,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -27,14 +31,23 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class VerFotoActivity extends AppCompatActivity {
 
     ImageView foto;
     Button regresar;
+    Button guardar;
     private ProgressDialog pd = null;
+    PhotoViewAttacher photoViewAttacher;
+    String repo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +56,7 @@ public class VerFotoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         foto=(ImageView)findViewById(R.id.ivFotoVer);
         regresar=(Button)findViewById(R.id.btnRegresarVerFoto);
+        guardar=(Button)findViewById(R.id.btnGuardarVerFoto);
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,7 +64,18 @@ public class VerFotoActivity extends AppCompatActivity {
             }
         });
         Bundle bolsa=getIntent().getExtras();
-        String repo=bolsa.getString("reporte");
+        repo=bolsa.getString("reporte");
+
+        guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap imagen = ((BitmapDrawable)foto.getDrawable()).getBitmap();
+                String ruta = guardarImagen(getApplicationContext(), "imagen"+repo, imagen);
+                //Toast.makeText(getApplicationContext(), ruta, Toast.LENGTH_LONG).show();
+                showAlertDialog(VerFotoActivity.this,"Guardar Foto",ruta,true);
+
+            }
+        });
         pd = ProgressDialog.show(this, "Foto", "Cargando foto...", true, false);
         new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/imagenesreporte/",repo).execute();
     }
@@ -64,6 +89,30 @@ public class VerFotoActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private String guardarImagen (Context context, String nombre, Bitmap imagen){
+        ContextWrapper cw = new ContextWrapper(context);
+
+        File imagesFolder = new File(
+                Environment.getExternalStorageDirectory(), "PrevengAPP");
+        imagesFolder.mkdirs();
+        File myPath = new File(imagesFolder, nombre+".jpg");
+
+        File dirImages = cw.getDir("Imagenes", Context.MODE_PRIVATE);
+        File myPath2 = new File(dirImages, nombre + ".png");
+
+        FileOutputStream fos = null;
+        try{
+            fos = new FileOutputStream(myPath);
+            imagen.compress(Bitmap.CompressFormat.JPEG, 10, fos);
+            fos.flush();
+        }catch (FileNotFoundException ex){
+            return "Ocurrio un Error ";
+        }catch (IOException ex){
+            return "Ocurrio un Error ";
+        }
+        return "Foto guardada exitosamente en "+myPath.getAbsolutePath();
     }
 
     public void verificarDatos(String datos){
@@ -81,6 +130,7 @@ public class VerFotoActivity extends AppCompatActivity {
                                 byte[] decodedString1 = Base64.decode(imag, Base64.DEFAULT);
                                 Bitmap mImageBitmap1 = BitmapFactory.decodeByteArray(decodedString1, 0, decodedString1.length);
                                 foto.setImageBitmap(mImageBitmap1);
+                                photoViewAttacher=new PhotoViewAttacher(foto);
 
                             }
                         }

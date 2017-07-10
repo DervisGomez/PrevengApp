@@ -48,8 +48,6 @@ public class ComunicacionActivity extends AppCompatActivity implements View.OnCl
         }catch (Exception e){
             showAlertDialog(this,"e",e.toString(),false);
         }
-
-
     }
 
     @Override
@@ -75,7 +73,7 @@ public class ComunicacionActivity extends AppCompatActivity implements View.OnCl
                     final String repo=bolsa.getString("reporte");
                     JSONObject persObject = new JSONObject();
                     try {
-                        persObject.put("notatexto",mens);
+                        persObject.put("notatexto",elimianrAcento(mens));
                         persObject.put("usuario",docu);
                         persObject.put("reporte",repo);
                     } catch (JSONException e) {
@@ -88,6 +86,19 @@ public class ComunicacionActivity extends AppCompatActivity implements View.OnCl
                 }
                 break;
         }
+    }
+    public String elimianrAcento(String item){
+        item=item.replaceAll("á","a");
+        item=item.replaceAll("é","e");
+        item=item.replaceAll("í","i");
+        item=item.replaceAll("ó","o");
+        item=item.replaceAll("ú","u");
+        item=item.replaceAll("Á","A");
+        item=item.replaceAll("É","E");
+        item=item.replaceAll("Í","I");
+        item=item.replaceAll("Ó","O");
+        item=item.replaceAll("Ú","U");
+        return item;
     }
 
     public void showAlertDialog(Context context, String title, String message, Boolean status) {
