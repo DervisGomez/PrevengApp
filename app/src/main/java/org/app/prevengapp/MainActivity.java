@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this, IngresarActivity.class);
+                intent.putExtra("reporte","-1");
                 startActivity(intent);
             }
         });

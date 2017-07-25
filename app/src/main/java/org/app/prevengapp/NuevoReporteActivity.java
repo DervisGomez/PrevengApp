@@ -34,6 +34,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.app.prenengapp.DAOApp;
+import org.app.prenengapp.Reporte;
+import org.app.prenengapp.ReporteDao;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -91,6 +94,7 @@ public class NuevoReporteActivity extends AppCompatActivity implements View.OnCl
         Bundle bolsa=getIntent().getExtras();
         String coor=bolsa.getString("coordenadas");
         String dire=bolsa.getString("direccion");
+        String docu=bolsa.getString("documento");
         etDireccion.setText(dire);
         etDireccion.setFocusable(false);
         etCoordenada.setText(coor);
@@ -103,6 +107,10 @@ public class NuevoReporteActivity extends AppCompatActivity implements View.OnCl
         btnFoto3.setVisibility(View.GONE);
         btnEnviar.setOnClickListener(this);
         llFoto.setVisibility(View.GONE);
+
+        if(docu.equals("-1")){
+            etDireccion.setVisibility(View.GONE);
+        }
 
         tomarFoto();
     }
@@ -281,20 +289,34 @@ public class NuevoReporteActivity extends AppCompatActivity implements View.OnCl
                         Bundle bolsa=getIntent().getExtras();
                         String docu=bolsa.getString("documento");
                         JSONObject persObject = new JSONObject();
-                        try {
-                            persObject.put("imagen1",imagenes[0]);
-                            persObject.put("imagen2",imagenes[1]);
-                            persObject.put("imagen3",imagenes[2]);
-                            persObject.put("coordenadas",coor);
-                            persObject.put("direccion",elimianrAcento(dire));
-                            persObject.put("titulo",elimianrAcento(titu));
-                            persObject.put("usuario",docu);
-                            persObject.put("descripcion",elimianrAcento(desc));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        if (docu.equals("-1")){
+                            DAOApp daoApp=new DAOApp();
+                            ReporteDao reporteDao=daoApp.getUsuarioDao();
+                            Reporte reporte=new Reporte();
+                            reporte.setCoordenadas(coor);
+                            reporte.setDescripcion(elimianrAcento(desc));
+                            reporte.setImagen(imagenes[0]);
+                            reporte.setTitulo(elimianrAcento(titu));
+                            reporteDao.insert(reporte);
+                            showAlertDialog2(NuevoReporteActivity.this,"Reporte","Registro guardado localmente",false);
+
+                        }else{
+                            try {
+                                persObject.put("imagen1",imagenes[0]);
+                                persObject.put("imagen2",imagenes[1]);
+                                persObject.put("imagen3",imagenes[2]);
+                                persObject.put("coordenadas",coor);
+                                persObject.put("direccion",elimianrAcento(dire));
+                                persObject.put("titulo",elimianrAcento(titu));
+                                persObject.put("usuario",docu);
+                                persObject.put("descripcion",elimianrAcento(desc));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            pd = ProgressDialog.show(this, "Reporte", "Validando Datos...", true, false);
+                            new MiTareaPost("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/registro",persObject.toString()).execute();
                         }
-                        pd = ProgressDialog.show(this, "Reporte", "Validando Datos...", true, false);
-                        new MiTareaPost("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/registro",persObject.toString()).execute();
+
                     }else{
                         showAlertDialog(NuevoReporteActivity.this,"Reporte","Hay campos vacios",false);
                     }
