@@ -117,7 +117,8 @@
             android:name=".VerFotoActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".SinConexionOpcionesActivity" />
-        <activity android:name=".ListaSinConexionActivity"></activity>
+        <activity android:name=".ListaSinConexionActivity" />
+        <activity android:name=".DetalleSinConexionActivity"></activity>
     </application>
 
 </manifest>

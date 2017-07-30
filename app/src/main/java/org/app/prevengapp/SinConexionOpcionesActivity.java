@@ -66,21 +66,21 @@ public class SinConexionOpcionesActivity extends AppCompatActivity implements Vi
         }
     }
     public void ubicar(){
-        MiServicio miServicio=new MiServicio(SinConexionOpcionesActivity.this);
-        lat=miServicio.getLatitud();
-        lng=miServicio.getLongitud();
+        //MiServicio miServicio=new MiServicio(SinConexionOpcionesActivity.this);
+        //lat=miServicio.getLatitud();
+        //lng=miServicio.getLongitud();
 
         // Add a marker in Sydney and move the camera
-        if (lat!=0.0&&lng!=0.0){
+        //if (lat!=0.0&&lng!=0.0){
             Intent intent=new Intent(SinConexionOpcionesActivity.this,NuevoReporteActivity.class);
             intent.putExtra("documento","-1");
-            intent.putExtra("direccion",String.valueOf(lat)+","+String.valueOf(lng));
-            intent.putExtra("coordenadas",String.valueOf(lat)+","+String.valueOf(lng));
+            intent.putExtra("direccion","d");
+            intent.putExtra("coordenadas","d");
             startActivity(intent);
             //posicionamiento.setText("Posicionamiento Inactivado");
-        }else{
-            showAlertDialog(SinConexionOpcionesActivity.this,"Error","Posicionamiento inactivo",true);
-        }
+        //}else{
+            //showAlertDialog(SinConexionOpcionesActivity.this,"Error","Posicionamiento inactivo",true);
+        //}
 
     }
 

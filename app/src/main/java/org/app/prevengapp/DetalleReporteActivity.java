@@ -112,13 +112,20 @@ public class DetalleReporteActivity extends AppCompatActivity implements View.On
         cambiar.setOnClickListener(this);
         verFoto.setOnClickListener(this);
 
+
+
+
         verMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(DetalleReporteActivity.this,MapsActivity.class);
-                intent.putExtra("coordenadas",reporte[1]);
-                intent.putExtra("direccion",reporte[2]);
-                startActivity(intent);
+                if (!reporte[1].equals("")){
+                    Intent intent=new Intent(DetalleReporteActivity.this,MapsActivity.class);
+                    intent.putExtra("coordenadas",reporte[1]);
+                    intent.putExtra("direccion",reporte[2]);
+                    startActivity(intent);
+                }else{
+                    showAlertDialog(DetalleReporteActivity.this,"Reporte","Mapa no disponible",false);
+                }
             }
         });
 

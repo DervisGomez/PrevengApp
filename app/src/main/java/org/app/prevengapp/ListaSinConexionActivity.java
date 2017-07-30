@@ -2,6 +2,7 @@ package org.app.prevengapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,6 +55,7 @@ public class ListaSinConexionActivity extends AppCompatActivity {
                 Reporte reporte=reportes.get(x);
                 listaReporteMostrar.add(new String[]{String.valueOf(reporte.getId()),reporte.getTitulo(),reporte.getDescripcion(),reporte.getCoordenadas(),reporte.getImagen()});
                 lista.setAdapter(new MisReportesSinConexionAdater(ListaSinConexionActivity.this, listaReporteMostrar));
+
             }
         }else{
             showAlertDialog(ListaSinConexionActivity.this,"Mis Reportes","No hay reporte registrados localmente",true);

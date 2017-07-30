@@ -162,7 +162,7 @@ public class NuevoReporteActivity extends AppCompatActivity implements View.OnCl
                         foto = Base64.encodeToString(byteArray, Base64.DEFAULT);*/
             //bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
-            bMap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            bMap.compress(Bitmap.CompressFormat.JPEG, 40, stream);
             byte[] byteArray = stream.toByteArray();
             if (imagenes[0].equals("")){
                 imagenes[0]  = Base64.encodeToString(byteArray, Base64.DEFAULT);
@@ -195,7 +195,7 @@ public class NuevoReporteActivity extends AppCompatActivity implements View.OnCl
                         foto = Base64.encodeToString(byteArray, Base64.DEFAULT);*/
             //bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
-            bMap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            bMap.compress(Bitmap.CompressFormat.JPEG, 40, stream);
             byte[] byteArray = stream.toByteArray();
             if (imagenes[0].equals("")){
                 imagenes[0]  = Base64.encodeToString(byteArray, Base64.DEFAULT);

@@ -16,11 +16,22 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/logo_principal"/>
+        </RelativeLayout>
         <Button
             android:id="@+id/btnNuevoSin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
+            android:layout_marginTop="16dp"
             android:text="Nuevo Reporte"/>
         <Button
             android:id="@+id/btnListaSin"

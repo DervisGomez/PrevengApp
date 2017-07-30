@@ -73,6 +73,14 @@ public class MisReportesSinConexionAdater extends BaseAdapter {
                 context.cerrarAplicacion();
             }
         });
+        id.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(finalRowView.getContext(),DetalleSinConexionActivity.class);
+                intent.putExtra("id",dd);
+                finalRowView.getContext().startActivity(intent);
+            }
+        });
 
         // Set data into the view
 

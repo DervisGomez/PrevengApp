@@ -185,9 +185,9 @@ public class IngresarActivity extends AppCompatActivity implements View.OnClickL
                                         persObject.put("imagen1",reporte.getImagen());
                                         persObject.put("imagen2","");
                                         persObject.put("imagen3","");
-                                        persObject.put("coordenadas",reporte.getCoordenadas());
-                                        diree=elimianrAcento(ubicar(reporte.getCoordenadas()));
-                                        persObject.put("direccion",diree);
+                                        persObject.put("coordenadas","");
+                                        //diree=elimianrAcento(ubicar(reporte.getCoordenadas()));
+                                        persObject.put("direccion","");
                                         persObject.put("titulo",reporte.getTitulo());
                                         persObject.put("usuario",docu);
                                         persObject.put("descripcion",reporte.getDescripcion());

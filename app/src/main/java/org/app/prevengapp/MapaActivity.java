@@ -1,8 +1,10 @@
 package org.app.prevengapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -14,6 +16,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -113,6 +116,29 @@ public class MapaActivity extends AppCompatActivity
             Dialog dialog=GooglePlayServicesUtil.getErrorDialog(status,(Activity)getApplicationContext(),10);
             dialog.show();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        if (keyCode == event.KEYCODE_BACK) {
+            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(MapaActivity.this);
+            dialogo1.setTitle("Importante!");
+            dialogo1.setMessage("Desea eliminar esta enfermedad de la lista?");
+            dialogo1.setCancelable(false);
+            dialogo1.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogo1, int id) {
+                    finish();
+                }
+            });
+            dialogo1.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogo1, int id) {
+
+                }
+            });
+            dialogo1.show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

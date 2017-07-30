@@ -136,6 +136,20 @@ public class RegistrarseActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    public String elimianrAcento(String item){
+        item=item.replaceAll("á","a");
+        item=item.replaceAll("é","e");
+        item=item.replaceAll("í","i");
+        item=item.replaceAll("ó","o");
+        item=item.replaceAll("ú","u");
+        item=item.replaceAll("Á","A");
+        item=item.replaceAll("É","E");
+        item=item.replaceAll("Í","I");
+        item=item.replaceAll("Ó","O");
+        item=item.replaceAll("Ú","U");
+        return item;
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -150,11 +164,11 @@ public class RegistrarseActivity extends AppCompatActivity implements View.OnCli
                     if (cont.equals(conf)){
                         JSONObject persObject = new JSONObject();
                         try {
-                            persObject.put("documento",cedu);
-                            persObject.put("nombres",nomb);
-                            persObject.put("email",corr);
-                            persObject.put("telefono",tele);
-                            persObject.put("clave",cont);
+                            persObject.put("documento",elimianrAcento(cedu));
+                            persObject.put("nombres",elimianrAcento(nomb));
+                            persObject.put("email",elimianrAcento(corr));
+                            persObject.put("telefono",elimianrAcento(tele));
+                            persObject.put("clave",elimianrAcento(cont));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

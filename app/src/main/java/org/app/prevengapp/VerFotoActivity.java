@@ -30,6 +30,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.app.prenengapp.DAOApp;
+import org.app.prenengapp.Reporte;
+import org.app.prenengapp.ReporteDao;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -66,6 +69,20 @@ public class VerFotoActivity extends AppCompatActivity {
         Bundle bolsa=getIntent().getExtras();
         repo=bolsa.getString("reporte");
 
+        if(repo.equals("-1")){
+            DAOApp daoApp=new DAOApp();
+            ReporteDao reporteDao=daoApp.getUsuarioDao();
+            final Reporte reporte=reporteDao.load(Long.valueOf(bolsa.getString("imagen")));
+            String imag=reporte.getImagen();
+            byte[] decodedString1 = Base64.decode(imag, Base64.DEFAULT);
+            Bitmap mImageBitmap1 = BitmapFactory.decodeByteArray(decodedString1, 0, decodedString1.length);
+            foto.setImageBitmap(mImageBitmap1);
+            photoViewAttacher=new PhotoViewAttacher(foto);
+        }else{
+            pd = ProgressDialog.show(this, "Foto", "Cargando foto...", true, false);
+            new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/imagenesreporte/",repo).execute();
+        }
+
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,8 +93,7 @@ public class VerFotoActivity extends AppCompatActivity {
 
             }
         });
-        pd = ProgressDialog.show(this, "Foto", "Cargando foto...", true, false);
-        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/imagenesreporte/",repo).execute();
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
