@@ -84,7 +84,7 @@ public class AsignarActivity extends AppCompatActivity implements View.OnClickLi
 
         pd = ProgressDialog.show(this, "Reporte", "Cargando...", true, false);
         control=1;
-        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=usuario/usuariosasignar","").execute();
+        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=usuario/usuariosasignar","").execute();
 
     }
 
@@ -108,7 +108,7 @@ public class AsignarActivity extends AppCompatActivity implements View.OnClickLi
                 if (docu.length()>0){
                     pd = ProgressDialog.show(this, "Reporte", "Cargando...", true, false);
                     control=2;
-                    new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/consultarreporte/",docu).execute();
+                    new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/consultarreporte/",docu).execute();
                 }else{
                     showAlertDialog(AsignarActivity.this,"Reporte","Introducir numero de reporte",false);
                 }
@@ -121,7 +121,7 @@ public class AsignarActivity extends AppCompatActivity implements View.OnClickLi
                     }else{
                         pd = ProgressDialog.show(this, "Reporte", "Cargando...", true, false);
                         control=3;
-                        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/consultarasignar/",reporte).execute();
+                        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/consultarasignar/",reporte).execute();
                     }
                 }else {
                     showAlertDialog(AsignarActivity.this,"Usuario","Debe buscar un usuario primero",false);
@@ -283,7 +283,7 @@ public class AsignarActivity extends AppCompatActivity implements View.OnClickLi
                                 int tip=spUsuario.getSelectedItemPosition();
                                 Bundle bolsa=getIntent().getExtras();
                                 String docu=bolsa.getString("documento");
-                                new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/reasignarreporte/",reporte+"/"+listaTpo.get(tip)[0]+"/"+docu).execute();
+                                new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/reasignarreporte/",reporte+"/"+listaTpo.get(tip)[0]+"/"+docu).execute();
                             }
                         }
                     }

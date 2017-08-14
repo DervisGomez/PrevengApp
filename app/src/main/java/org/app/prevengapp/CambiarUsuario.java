@@ -64,7 +64,7 @@ public class CambiarUsuario extends AppCompatActivity implements View.OnClickLis
 
         pd = ProgressDialog.show(this, "Usuario", "Cargando...", true, false);
         control=1;
-        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=usuario/listadotiposusuarios","").execute();
+        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=usuario/listadotiposusuarios","").execute();
 
     }
 
@@ -88,7 +88,7 @@ public class CambiarUsuario extends AppCompatActivity implements View.OnClickLis
                 if (docu.length()>0){
                     pd = ProgressDialog.show(this, "Usuario", "Cargando...", true, false);
                     control=2;
-                    new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=usuario/consultarusuario/",docu).execute();
+                    new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=usuario/consultarusuario/",docu).execute();
                 }else{
                     showAlertDialog(CambiarUsuario.this,"Usuario","Introducir numero de documento",false);
                 }
@@ -101,7 +101,7 @@ public class CambiarUsuario extends AppCompatActivity implements View.OnClickLis
                     }else{
                         pd = ProgressDialog.show(this, "Usuario", "Cargando...", true, false);
                         control=3;
-                        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=usuario/cambiotipousu/",cedula+"/"+listaTpo.get(tip)[0]).execute();
+                        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=usuario/cambiotipousu/",cedula+"/"+listaTpo.get(tip)[0]).execute();
                     }
                 }else {
                     showAlertDialog(CambiarUsuario.this,"Usuario","Debe buscar un usuario primero",false);

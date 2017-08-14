@@ -79,10 +79,10 @@ public class ComunicacionActivity extends AppCompatActivity implements View.OnCl
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    pd = ProgressDialog.show(this, "Reporte", "Guardando datos...", true, false);
-                    new MiTareaPost("http://semgerd.com/semgerd/index.php?PATH_INFO=notas/registro",persObject.toString()).execute();
+                    pd = ProgressDialog.show(this, "Mensaje", "Guardando datos...", true, false);
+                    new MiTareaPost("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=notas/registro",persObject.toString()).execute();
                 }else{
-                    showAlertDialog(ComunicacionActivity.this,"Comunicación","El campo mensaje esta vacio",false);
+                    showAlertDialog(ComunicacionActivity.this,"Mensaje","El campo mensaje esta vacio",false);
                 }
                 break;
         }
@@ -98,6 +98,8 @@ public class ComunicacionActivity extends AppCompatActivity implements View.OnCl
         item=item.replaceAll("Í","I");
         item=item.replaceAll("Ó","O");
         item=item.replaceAll("Ú","U");
+        item=item.replaceAll("ñ","n");
+        item=item.replaceAll("Ñ","N");
         return item;
     }
 

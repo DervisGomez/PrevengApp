@@ -140,7 +140,7 @@ public class DetalleReporteActivity extends AppCompatActivity implements View.On
 
         control=1;
         pd = ProgressDialog.show(this, "Reportes", "Buscando Reportes...", true, false);
-        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/listadoimagenes/",id).execute();
+        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/listadoimagenes/",id).execute();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -216,7 +216,7 @@ public class DetalleReporteActivity extends AppCompatActivity implements View.On
 
         control=1;
         pd = ProgressDialog.show(this, "Reportes", "Buscando Reportes...", true, false);
-        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/listadoimagenes/",id).execute();
+        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/listadoimagenes/",id).execute();
     }
 
     @Override

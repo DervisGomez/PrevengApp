@@ -238,6 +238,22 @@ public class NuevoReporteActivity extends AppCompatActivity implements View.OnCl
         dialog.show();
     }
 
+    public Bitmap scalarImagen(Bitmap bitmap){
+        if (bitmap.getWidth()>1024||bitmap.getHeight()>1024){
+            if (bitmap.getWidth()>bitmap.getHeight()){
+                int x=bitmap.getHeight()*1024/bitmap.getWidth();
+                return Bitmap.createScaledBitmap(bitmap,1024,x,true);
+
+            }else{
+                int x=bitmap.getWidth()*1024/bitmap.getHeight();
+                return Bitmap.createScaledBitmap(bitmap,x,1024,true);
+            }
+        }else {
+            return bitmap;
+        }
+
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -247,6 +263,7 @@ public class NuevoReporteActivity extends AppCompatActivity implements View.OnCl
                 }else {
                     byte[] decodedString = Base64.decode(imagenes[0], Base64.DEFAULT);
                     Bitmap mImageBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    mImageBitmap=scalarImagen(mImageBitmap);
                     foto.setImageBitmap(mImageBitmap);
                     llFoto.setVisibility(View.VISIBLE);
                     PhotoViewAttacher photoViewAttacher=new PhotoViewAttacher(foto);
@@ -314,7 +331,7 @@ public class NuevoReporteActivity extends AppCompatActivity implements View.OnCl
                                 e.printStackTrace();
                             }
                             pd = ProgressDialog.show(this, "Reporte", "Validando Datos...", true, false);
-                            new MiTareaPost("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/registro",persObject.toString()).execute();
+                            new MiTareaPost("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/registro",persObject.toString()).execute();
                         }
 
                     }else{

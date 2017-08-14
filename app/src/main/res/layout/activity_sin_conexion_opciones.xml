@@ -26,6 +26,12 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/logo_principal"/>
         </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="REPORTES SIN DATOS\n(Despues de reportar sin conexión, sincronizar al conectarse a una red de datos o wiffi)"/>
         <Button
             android:id="@+id/btnNuevoSin"
             android:layout_width="match_parent"

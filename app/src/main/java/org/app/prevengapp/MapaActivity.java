@@ -124,7 +124,7 @@ public class MapaActivity extends AppCompatActivity
         if (keyCode == event.KEYCODE_BACK) {
             AlertDialog.Builder dialogo1 = new AlertDialog.Builder(MapaActivity.this);
             dialogo1.setTitle("Importante!");
-            dialogo1.setMessage("Desea eliminar esta enfermedad de la lista?");
+            dialogo1.setMessage("¿Desea salir de la aplicación?");
             dialogo1.setCancelable(false);
             dialogo1.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogo1, int id) {
@@ -186,7 +186,21 @@ public class MapaActivity extends AppCompatActivity
             Intent intent = new Intent(MapaActivity.this,ContactoActivity.class);
             startActivity(intent);
         }else if (id == R.id.nav_salir){
-            finish();
+            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(MapaActivity.this);
+            dialogo1.setTitle("Importante!");
+            dialogo1.setMessage("¿Desea salir de la aplicación?");
+            dialogo1.setCancelable(false);
+            dialogo1.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogo1, int id) {
+                    finish();
+                }
+            });
+            dialogo1.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogo1, int id) {
+
+                }
+            });
+            dialogo1.show();
         }else if (id == R.id.nav_Cambiar_usuario){
             Intent intent= new Intent(MapaActivity.this,CambiarUsuario.class);
             startActivity(intent);

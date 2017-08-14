@@ -54,7 +54,7 @@ public class SeguimientoActivity extends AppCompatActivity {
         repo=bolsa.getString("reporte");
 
         pd = ProgressDialog.show(this, "Reportes", "Buscando Reportes...", true, false);
-        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=notas/listado/",repo).execute();
+        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=notas/listado/",repo).execute();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +73,7 @@ public class SeguimientoActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         pd = ProgressDialog.show(this, "Reportes", "Buscando Reportes...", true, false);
-        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=notas/listado/",repo).execute();
+        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=notas/listado/",repo).execute();
     }
 
     @Override

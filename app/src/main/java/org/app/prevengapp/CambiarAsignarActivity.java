@@ -65,7 +65,7 @@ public class CambiarAsignarActivity extends AppCompatActivity implements View.On
 
         pd = ProgressDialog.show(this, "Cambiar", "Cargando...", true, false);
         control=1;
-        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=usuario/usuariosasignar","").execute();
+        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=usuario/usuariosasignar","").execute();
 
     }
 
@@ -95,7 +95,7 @@ public class CambiarAsignarActivity extends AppCompatActivity implements View.On
                         Bundle bolsa=getIntent().getExtras();
                         String docu=bolsa.getString("documento");
                         String num=bolsa.getString("reporte");
-                        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/reasignarreporte/",num+"/"+listaTpo.get(tip)[0]+"/"+docu).execute();
+                        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/reasignarreporte/",num+"/"+listaTpo.get(tip)[0]+"/"+docu).execute();
                     }
                 }else {
                     showAlertDialog(CambiarAsignarActivity.this,"Cambiar","Debe buscar un usuario primero",false);

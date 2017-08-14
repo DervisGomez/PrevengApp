@@ -65,7 +65,7 @@ public class CambiarPrioridadActivity extends AppCompatActivity implements View.
 
         pd = ProgressDialog.show(this, "Cambiar", "Cargando...", true, false);
         control=1;
-        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/listadoprioridad","").execute();
+        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/listadoprioridad","").execute();
 
     }
 
@@ -94,7 +94,7 @@ public class CambiarPrioridadActivity extends AppCompatActivity implements View.
                         control=2;
                         Bundle bolsa=getIntent().getExtras();
                         String doc=bolsa.getString("reporte");
-                        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/asignarprioridad/",doc+"/"+lista[tip]).execute();
+                        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/asignarprioridad/",doc+"/"+lista[tip]).execute();
                     }
                 }else {
                     showAlertDialog(CambiarPrioridadActivity.this,"Cambiar","Debe buscar un usuario primero",false);

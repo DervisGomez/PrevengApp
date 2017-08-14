@@ -5,9 +5,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,6 +60,10 @@ public class IngresarActivity extends AppCompatActivity implements View.OnClickL
     TextView tvOlvidar;
     private ProgressDialog pd = null;
     TextView tvSin;
+    String docum;
+    String nombr;
+    String tipo;
+    public static final int PERMISO_MAPA=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +133,7 @@ public class IngresarActivity extends AppCompatActivity implements View.OnClickL
                 String con=etContrasenna.getText().toString();
                 if(ced.length()>0&&con.length()>0){
                     pd = ProgressDialog.show(this, "Iniciar Sesión", "Validando Datos...", true, false);
-                    new  MiTareaGet("http://semgerd.com/semgerd/?PATH_INFO=usuario/login/",ced+"/"+con).execute();
+                    new  MiTareaGet("http://semgerdcucuta.com/semgerd/?PATH_INFO=usuario/login/",ced+"/"+con).execute();
                 }else{
                     showAlertDialog(IngresarActivity.this, "Ingresar","Debe introducir cédula y contraseña",false);
                 }
@@ -142,6 +150,61 @@ public class IngresarActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
 
+    }
+
+    public void permisosMapa(){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.MAPS_RECEIVE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.MAPS_RECEIVE)) {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PERMISO_MAPA);
+
+            } else {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PERMISO_MAPA);
+
+            }
+
+        }else{
+            Intent intent=new Intent(IngresarActivity.this,MapaActivity.class);
+            intent.putExtra("documento",docum);
+            intent.putExtra("nombre",nombr);
+            intent.putExtra("tipo",tipo);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISO_MAPA: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED&& grantResults[1] == PackageManager.PERMISSION_GRANTED&& grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+                    Intent intent=new Intent(IngresarActivity.this,MapaActivity.class);
+                    intent.putExtra("documento",docum);
+                    intent.putExtra("nombre",nombr);
+                    intent.putExtra("tipo",tipo);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    showAlertDialog(this,"Permisos","No se puedo iniciar sesión ya que para usar esta aplicación debe dar todo los permisos solicitados",true);
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 
     public void verificarDatos(String datos){
@@ -166,12 +229,27 @@ public class IngresarActivity extends AppCompatActivity implements View.OnClickL
                                 if (repo.equals("-1")){
                                     etCedula.setText("");
                                     etContrasenna.setText("");
-                                    Intent intent=new Intent(IngresarActivity.this,MapaActivity.class);
-                                    intent.putExtra("documento",docu);
-                                    intent.putExtra("nombre",objO.get("NOMBRES").getAsString());
-                                    intent.putExtra("tipo",objO.get("TIPOUSUARIO").getAsString());
-                                    startActivity(intent);
-                                    finish();
+
+                                    try {
+                                        if (Build.VERSION.SDK_INT >= 23){
+                                            docum=docu;
+                                            nombr=objO.get("NOMBRES").getAsString();
+                                            tipo=objO.get("TIPOUSUARIO").getAsString();
+                                            permisosMapa();
+                                        }else{
+                                            Intent intent=new Intent(IngresarActivity.this,MapaActivity.class);
+                                            intent.putExtra("documento",docu);
+                                            intent.putExtra("nombre",objO.get("NOMBRES").getAsString());
+                                            intent.putExtra("tipo",objO.get("TIPOUSUARIO").getAsString());
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }catch (Exception e){
+                                        showAlertDialog(IngresarActivity.this,"Ingresar","Debe otorgar permiso de ubicación para ingresar",false);
+                                    }
+
+
+
                                 }else {
                                     DAOApp daoApp=new DAOApp();
                                     ReporteDao reporteDao=daoApp.getUsuarioDao();
@@ -196,7 +274,7 @@ public class IngresarActivity extends AppCompatActivity implements View.OnClickL
                                     }
                                     pd = ProgressDialog.show(this, "Reporte", "Sincronizando datos Datos...", true, false);
                                     //showAlertDialog(IngresarActivity.this,"Reporte",diree,true);
-                                    new MiTareaPost("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/registro",persObject.toString()).execute();
+                                    new MiTareaPost("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/registro",persObject.toString()).execute();
 
                                 }
 

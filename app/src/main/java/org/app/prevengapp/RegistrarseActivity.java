@@ -90,6 +90,7 @@ public class RegistrarseActivity extends AppCompatActivity implements View.OnCli
         alertDialog.setButton("Aceptar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent=new Intent(RegistrarseActivity.this,IngresarActivity.class);
+                intent.putExtra("reporte","-1");
                 startActivity(intent);
                 finish();
             }
@@ -173,7 +174,7 @@ public class RegistrarseActivity extends AppCompatActivity implements View.OnCli
                             e.printStackTrace();
                         }
                         pd = ProgressDialog.show(this, "Iniciar Sesión", "Validando Datos...", true, false);
-                        new MiTareaPost("http://semgerd.com/semgerd/index.php?PATH_INFO=usuario/registro",persObject.toString()).execute();
+                        new MiTareaPost("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=usuario/registro",persObject.toString()).execute();
                     }else{
                         showAlertDialog(RegistrarseActivity.this, "Registrarme","Las contraseña no coinciden",false);
                     }

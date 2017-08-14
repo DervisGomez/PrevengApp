@@ -88,7 +88,7 @@ public class MisReportesActivity extends AppCompatActivity implements View.OnCli
         String docu=bolsa.getString("documento");
 
         pd = ProgressDialog.show(this, "Reportes", "Buscando Reportes...", true, false);
-        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/listado/",docu).execute();
+        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/listado/",docu).execute();
 
         final Calendar c= Calendar.getInstance();
         mYear=c.get(Calendar.YEAR);

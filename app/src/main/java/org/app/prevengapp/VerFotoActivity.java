@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -76,11 +77,12 @@ public class VerFotoActivity extends AppCompatActivity {
             String imag=reporte.getImagen();
             byte[] decodedString1 = Base64.decode(imag, Base64.DEFAULT);
             Bitmap mImageBitmap1 = BitmapFactory.decodeByteArray(decodedString1, 0, decodedString1.length);
+            mImageBitmap1=scalarImagen(mImageBitmap1);
             foto.setImageBitmap(mImageBitmap1);
             photoViewAttacher=new PhotoViewAttacher(foto);
         }else{
             pd = ProgressDialog.show(this, "Foto", "Cargando foto...", true, false);
-            new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/imagenesreporte/",repo).execute();
+            new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/imagenesreporte/",repo).execute();
         }
 
         guardar.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +133,22 @@ public class VerFotoActivity extends AppCompatActivity {
         return "Foto guardada exitosamente en "+myPath.getAbsolutePath();
     }
 
+    public Bitmap scalarImagen(Bitmap bitmap){
+        if (bitmap.getWidth()>1024||bitmap.getHeight()>1024){
+            if (bitmap.getWidth()>bitmap.getHeight()){
+                int x=bitmap.getHeight()*1024/bitmap.getWidth();
+                return Bitmap.createScaledBitmap(bitmap,1024,x,true);
+
+            }else{
+                int x=bitmap.getWidth()*1024/bitmap.getHeight();
+                return Bitmap.createScaledBitmap(bitmap,x,1024,true);
+            }
+        }else {
+            return bitmap;
+        }
+
+    }
+
     public void verificarDatos(String datos){
         if(datos.length()>2){
             try{
@@ -145,8 +163,12 @@ public class VerFotoActivity extends AppCompatActivity {
                                 String imag=objO.get("IMAGEN").getAsString();
                                 byte[] decodedString1 = Base64.decode(imag, Base64.DEFAULT);
                                 Bitmap mImageBitmap1 = BitmapFactory.decodeByteArray(decodedString1, 0, decodedString1.length);
+                                //mImageBitmap1=Bitmap.createScaledBitmap(mImageBitmap1,mImageBitmap1.getWidth()/4,mImageBitmap1.getHeight()/4,true);
+                                mImageBitmap1=scalarImagen(mImageBitmap1);
                                 foto.setImageBitmap(mImageBitmap1);
                                 photoViewAttacher=new PhotoViewAttacher(foto);
+
+
 
                             }
                         }

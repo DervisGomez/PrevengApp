@@ -61,7 +61,7 @@ public class CambiarEstadoActivity extends AppCompatActivity implements View.OnC
 
         pd = ProgressDialog.show(this, "Cambiar", "Cargando...", true, false);
         control=1;
-        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/listadoestados","").execute();
+        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/listadoestados","").execute();
 
     }
 
@@ -90,7 +90,7 @@ public class CambiarEstadoActivity extends AppCompatActivity implements View.OnC
                         control=2;
                         Bundle bolsa=getIntent().getExtras();
                         String doc=bolsa.getString("reporte");
-                        new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/asignarestado/",doc+"/"+lista[tip]).execute();
+                        new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/asignarestado/",doc+"/"+lista[tip]).execute();
                     }
                 }else {
                     showAlertDialog(CambiarEstadoActivity.this,"Cambiar","Debe buscar un usuario primero",false);

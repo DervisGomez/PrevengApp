@@ -3,10 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:padding="8dp"
+    android:background="@color/colorWhiter"
     tools:context="org.app.prevengapp.TipsActivity">
 
     <ScrollView
@@ -17,38 +15,47 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/logo_principal"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="22dp"
                 android:textStyle="bold"
-                android:text="¿Qué debes hacer en caso de...?"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="240dp"
                 android:layout_margin="8dp"
-                android:src="@drawable/logologin"/>
-            <TextView
+                android:text="¿Qué debes hacer en caso de...?"/>
+
+            <Button
+                android:id="@+id/btnTIpsDeslizamiento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="19dp"
-                android:layout_marginBottom="16dp"
-                android:text="Recomendaciones Generales..."/>
-            <TextView
+                android:background="@color/colorWhiter"
+                android:textColor="@color/colorAccent"
+                android:text="Deslizamientos"/>
+            <Button
+                android:id="@+id/btnTIpsIncendio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="1. Paso 1"/>
-            <TextView
+                android:background="@color/colorWhiter"
+                android:textColor="@color/colorAccent"
+                android:text="Incendios"/>
+            <Button
+                android:id="@+id/btnTIpsInundacion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="2. Paso 2"/>
-            <TextView
+                android:background="@color/colorWhiter"
+                android:textColor="@color/colorAccent"
+                android:text="Inundaciones"/>
+            <Button
+                android:id="@+id/btnTIpsSismo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="3. Paso 3"/>
+                android:background="@color/colorWhiter"
+                android:textColor="@color/colorAccent"
+                android:text="Sismos"/>
         </LinearLayout>
 
     </ScrollView>

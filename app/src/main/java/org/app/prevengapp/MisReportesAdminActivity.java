@@ -108,9 +108,9 @@ public class MisReportesAdminActivity extends AppCompatActivity implements View.
         usua=bolsa.getString("usuario");
         pd = ProgressDialog.show(this, "Reportes", "Buscando Reportes...", true, false);
         if (usua.equals("0")){
-            new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/listadoadmin","").execute();
+            new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/listadoadmin","").execute();
         }else{
-            new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/reportesasignados/",docu).execute();
+            new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/reportesasignados/",docu).execute();
         }
 
         final Calendar c= Calendar.getInstance();
@@ -176,7 +176,7 @@ public class MisReportesAdminActivity extends AppCompatActivity implements View.
         super.onActivityResult(requestCode, resultCode, data);
         pd = ProgressDialog.show(this, "Reportes", "Buscando Reportes...", true, false);
         if (usua.equals("0")){
-            new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/listadoadmin","").execute();
+            new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/listadoadmin","").execute();
         }
     }
 
@@ -191,7 +191,7 @@ public class MisReportesAdminActivity extends AppCompatActivity implements View.
                 if (control==1){
                     pd = ProgressDialog.show(this, "Cambiar", "Cargando...", true, false);
                     control=2;
-                    new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=reporte/listadoestados","").execute();
+                    new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=reporte/listadoestados","").execute();
                 }else{
                     rlFiltrar.setVisibility(View.VISIBLE);
                 }

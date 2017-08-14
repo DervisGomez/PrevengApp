@@ -87,7 +87,7 @@ public class RecuperarActivity extends AppCompatActivity implements View.OnClick
                 String cedu=etCedula.getText().toString();
                 if (etCedula.length()>0){
                     pd = ProgressDialog.show(this, "Recuperar Contraseña", "Validando Usuario...", true, false);
-                    new MiTareaGet("http://semgerd.com/semgerd/index.php?PATH_INFO=usuario/recuperar/",cedu).execute();
+                    new MiTareaGet("http://semgerdcucuta.com/semgerd/index.php?PATH_INFO=usuario/recuperar/",cedu).execute();
                 }else{
                     showAlertDialog(RecuperarActivity.this,"Recuperar Contraseña","El campo cedula no puede estar vacio",false);
                 }
